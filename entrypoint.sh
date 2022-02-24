@@ -19,6 +19,11 @@ else
 	mv "$PGDATA/"!(_source|_target) "$PGDATA/_source/"
 fi
 
+if [ "$source_version" = "$target_version" ]; then
+	echo ">>> Source PostgreSQL version equals to target: $target_version"
+	exit 1
+fi
+
 if [ ! -x "/usr/lib/postgresql/$source_version/bin/initdb" ]; then
 	echo ">>> Unsupported PostgreSQL version: $source_version"
 	exit 1
